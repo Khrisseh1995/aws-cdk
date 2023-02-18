@@ -57,6 +57,13 @@ export class Result {
  */
 export interface PassProps {
   /**
+   * An optional name for this state
+   *
+   * @default - The node id will instead be used for the name
+   */
+  readonly stateName?: string;
+
+  /**
    * An optional description for this state
    *
    * @default No comment

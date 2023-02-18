@@ -8,6 +8,13 @@ import { State } from './state';
  */
 export interface FailProps {
   /**
+   * An optional name for this state
+   *
+   * @default - The node id will instead be used for the name
+   */
+  readonly stateName?: string;
+
+  /**
    * An optional description for this state
    *
    * @default No comment
