@@ -9,7 +9,14 @@ import { CatchProps, Errors, IChainable, INextable, RetryProps } from '../types'
  */
 export interface StateProps {
   /**
-   * A comment describing this state
+   * An optional name for this state
+   *
+   * @default - The node id will instead be used for the name
+   */
+
+  readonly stateName?: string;
+  /**
+   * A comment descrikbing this state
    *
    * @default No comment
    */
@@ -156,6 +163,7 @@ export abstract class State extends Construct implements IChainable {
   // pragmatic!
   protected readonly comment?: string;
   protected readonly inputPath?: string;
+  protected readonly stateName?: string;
   protected readonly parameters?: object;
   protected readonly outputPath?: string;
   protected readonly resultPath?: string;
@@ -195,6 +203,7 @@ export abstract class State extends Construct implements IChainable {
 
     this.comment = props.comment;
     this.inputPath = props.inputPath;
+    this.stateName = props.stateName;
     this.parameters = props.parameters;
     this.outputPath = props.outputPath;
     this.resultPath = props.resultPath;
@@ -218,7 +227,7 @@ export abstract class State extends Construct implements IChainable {
    * Tokenized string that evaluates to the state's ID
    */
   public get stateId(): string {
-    return this.prefixes.concat(this.id).join('');
+    return this.prefixes.concat(this.stateName ?? this.id).join('');
   }
 
   /**
